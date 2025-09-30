@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+.uv/
+# Dados e modelos
+data/*
+!data/**/.gitkeep
+mlruns/
+models/
+metrics/
+# IDE
+.vscode/
+.idea/
+# Docker
+*.log
+# Frontend build (se houver)
+frontend/dist/
