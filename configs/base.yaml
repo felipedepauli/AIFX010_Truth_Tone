@@ -1,4 +1,0 @@
-sample_rate: 16000
-frame_ms: 25
-hop_ms: 10
-enf_nominal: 60.0

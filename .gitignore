@@ -19,3 +19,7 @@ metrics/
 *.log
 # Frontend build (se houver)
 frontend/dist/
+ml/data/external
+ml/data/processed
+ml/data/interim
+ml/data/raw
