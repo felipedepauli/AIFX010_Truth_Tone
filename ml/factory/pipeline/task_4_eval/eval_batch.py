@@ -273,25 +273,33 @@ def main() -> None:
     topk = {}
     if args.dump_topk and len(per_file_rows) > 0:
         k = int(args.dump_topk)
-        # find index of prob column for pos_name
-        pos_col = 3 + pos_idx  # path,true,pred then probs...
-        scored = [(r[0], r[1], r[2], float(r[pos_col])) for r in per_file_rows]
-        top_pos = sorted(scored, key=lambda t: -t[3])[:k]
-        # for the opposite class (if binary)
+
+        # índices das colunas de prob no per_file_rows
+        # row = [path, true_label, pred_label, prob_label0, prob_label1, ...]
+        pos_col = 3 + pos_idx
+
+        # Top-K da classe positiva
+        scored_pos = [(r[0], r[1], r[2], float(r[pos_col])) for r in per_file_rows]
+        top_pos = sorted(scored_pos, key=lambda t: -t[3])[:k]
+
+        # Se binário, também computa Top-K da classe "oposta"
         if len(label_names) == 2:
             neg_idx = 1 - pos_idx
             neg_col = 3 + neg_idx
-            top_neg = sorted(scored, key=lambda t: -float(t[neg_col]))[:k]
+            scored_neg = [(r[0], r[1], r[2], float(r[neg_col])) for r in per_file_rows]
+            top_neg = sorted(scored_neg, key=lambda t: -t[3])[:k]
         else:
             top_neg = []
+
         topk = {
             f"top_{pos_name}": [
                 {"path": p, "true": y, "pred": yhat, "prob": s} for (p, y, yhat, s) in top_pos
             ],
-            f"top_{label_names[1 - pos_idx] if len(label_names)==2 else 'other'}": [
+            f"top_{label_names[1 - pos_idx] if len(label_names) == 2 else 'other'}": [
                 {"path": p, "true": y, "pred": yhat, "prob": s} for (p, y, yhat, s) in top_neg
             ],
         }
+
 
     summary = {
         "model": str(args.model),

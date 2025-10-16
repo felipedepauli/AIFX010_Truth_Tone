@@ -1,7 +1,7 @@
 [project]
 name = "hoaxhertz"
 version = "0.1.0"
-description = "Detecção de splicing de voz (DSP/ML clássico)"
+description = "Voice splicing detection (classical DSP/ML)"
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [{name="Seu Nome"}]
