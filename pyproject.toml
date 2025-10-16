@@ -1,0 +1,39 @@
+[project]
+name = "hoaxhertz"
+version = "0.1.0"
+description = "Voice splicing detection (classical DSP/ML)"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{name="Seu Nome"}]
+license = {text = "MIT"}
+dependencies = [
+  "numpy",
+  "scipy",
+  "pandas",
+  "librosa",
+  "soundfile",
+  "webrtcvad",
+  "scikit-learn",
+  "tqdm",
+  "pydantic>=2",
+  "pyyaml",
+  "matplotlib",
+  "mlflow",
+  "fastapi",
+  "uvicorn[standard]",
+  "python-dotenv",
+  "pyroomacoustics",
+  "kagglehub>=0.3.13",
+  "natsort>=8.4.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "ruff", "black", "mypy", "types-PyYAML"]
+
+[project.scripts]
+hoaxhertz-batch = "hoaxhertz.cli:main"
+hoaxhertz-serve = "hoaxhertz.service.run:main"
+
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
